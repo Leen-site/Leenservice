@@ -1,0 +1,84 @@
+<div class="container">
+  <form>
+    <div class="row">
+      <h4>Account</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" id="full-name" placeholder="Full Name">
+        <div class="input-icon">
+          <i class="fa fa-user"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h4>Payment Details</h4>
+      <div class="input-group">
+        <input id="payment-method-card" type="radio" name="payment-method" value="card" checked>
+        <label for="payment-method-card">
+          <span>
+            <i class="fa fa-cc-visa"></i> Credit Card
+          </span>
+        </label>
+        <input id="payment-method-paypal" type="radio" name="payment-method" value="paypal">
+        <label for="payment-method-paypal">
+          <span>
+            <i class="fa fa-paypal"></i> PayPal
+          </span>
+        </label>
+      </div>
+      <div id="credit-card-fields">
+        <div class="input-group input-group-icon">
+          <input type="text" id="card-number" placeholder="Card Number" maxlength="16" pattern="\d{16}">
+          <div class="input-icon">
+            <i class="fa fa-credit-card"></i>
+          </div>
+        </div>
+        <div class="col-half">
+          <div class="input-group">
+            <select id="expiry-month"></select>
+            <select id="expiry-year"></select>
+          </div>
+        </div>
+        <div class="col-half">
+          <div class="input-group input-group-icon">
+            <input type="text" id="card-cvc" placeholder="Card CVC" maxlength="3" pattern="\d{3}">
+            <div class="input-icon">
+              <i class="fa fa-lock"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="paypal-fields" style="display: none;">
+        <div class="input-group input-group-icon">
+          <input type="email" id="paypal-email" placeholder="PayPal Email">
+          <div class="input-icon">
+            <i class="fa fa-envelope"></i>
+          </div>
+        </div>
+        <div class="input-group input-group-icon">
+          <input type="password" placeholder="PayPal Password">
+          <div class="input-icon">
+            <i class="fa fa-lock"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h4>Select Payment Amount</h4>
+      <div class="input-group">
+        <select id="currency-selector">
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="JPY">¥ JPY</option>
+          <option value="INR">₹ INR</option>
+        </select>
+        <input id="amount-input" type="number" placeholder="Enter amount" min="1">
+      </div>
+    </div>
+    <div class="row">
+      <button id="pay-button" type="button" style="background-color: #4CAF50; color: white; padding: 1em; border: none; border-radius: 3px; cursor: pointer;">
+        Pay
+      </button>
+    </div>
+  </form>
+</div>
