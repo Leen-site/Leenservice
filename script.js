@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Dynamically load the CSS file
-  const loadCSS = (href) => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    document.head.appendChild(link);
+  // Dynamically load the CSS using XMLHttpRequest
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "https://raw.githubusercontent.com/Leenxz/Leenservice/refs/heads/main/script.js", true); // Replace with your actual CSS file URL
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4) {
+      if (xhttp.status === 200) {
+        var link = document.createElement('style');
+        link.innerHTML = xhttp.responseText;
+        document.getElementsByTagName('head')[0].appendChild(link);
+      }
+    }
   };
-
-  // Load your style.css
-  loadCSS("style.css"); // Change this to the correct path if necessary
+  xhttp.send(null);
 
   const cardOption = document.getElementById("payment-method-card");
   const paypalOption = document.getElementById("payment-method-paypal");
