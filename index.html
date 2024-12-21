@@ -9,11 +9,11 @@
 </head>
 <body>
   <div class="container">
-    <form id="payment-form">
+    <form>
       <div class="row">
         <h4>Account</h4>
         <div class="input-group input-group-icon">
-          <input type="text" id="full-name" placeholder="Full Name" required>
+          <input type="text" id="full-name" placeholder="Full Name">
           <div class="input-icon">
             <i class="fa fa-user"></i>
           </div>
@@ -37,20 +37,20 @@
         </div>
         <div id="credit-card-fields">
           <div class="input-group input-group-icon">
-            <input type="text" id="card-number" placeholder="Card Number" maxlength="16" pattern="\d{16}" required>
+            <input type="text" id="card-number" placeholder="Card Number" maxlength="16" pattern="\d{16}">
             <div class="input-icon">
               <i class="fa fa-credit-card"></i>
             </div>
           </div>
           <div class="col-half">
             <div class="input-group">
-              <select id="expiry-month" required></select>
-              <select id="expiry-year" required></select>
+              <select id="expiry-month"></select>
+              <select id="expiry-year"></select>
             </div>
           </div>
           <div class="col-half">
             <div class="input-group input-group-icon">
-              <input type="text" id="card-cvc" placeholder="Card CVC" maxlength="3" pattern="\d{3}" required>
+              <input type="text" id="card-cvc" placeholder="Card CVC" maxlength="3" pattern="\d{3}">
               <div class="input-icon">
                 <i class="fa fa-lock"></i>
               </div>
@@ -59,13 +59,13 @@
         </div>
         <div id="paypal-fields" style="display: none;">
           <div class="input-group input-group-icon">
-            <input type="email" id="paypal-email" placeholder="PayPal Email" required>
+            <input type="email" id="paypal-email" placeholder="PayPal Email">
             <div class="input-icon">
               <i class="fa fa-envelope"></i>
             </div>
           </div>
           <div class="input-group input-group-icon">
-            <input type="password" id="paypal-password" placeholder="PayPal Password" required>
+            <input type="password" placeholder="PayPal Password">
             <div class="input-icon">
               <i class="fa fa-lock"></i>
             </div>
@@ -75,14 +75,14 @@
       <div class="row">
         <h4>Select Payment Amount</h4>
         <div class="input-group">
-          <select id="currency-selector" required>
+          <select id="currency-selector">
             <option value="USD">$ USD</option>
             <option value="EUR">€ EUR</option>
             <option value="GBP">£ GBP</option>
             <option value="JPY">¥ JPY</option>
             <option value="INR">₹ INR</option>
           </select>
-          <input id="amount-input" type="number" placeholder="Enter amount" min="1" required>
+          <input id="amount-input" type="number" placeholder="Enter amount" min="1">
         </div>
       </div>
       <div class="row">
@@ -92,31 +92,5 @@
       </div>
     </form>
   </div>
-
-  <script>
-    document.getElementById('pay-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const fullName = document.getElementById('full-name').value;
-      const cardNumber = document.getElementById('card-number').value;
-      const expiryMonth = document.getElementById('expiry-month').value;
-      const expiryYear = document.getElementById('expiry-year').value;
-      const cardCVC = document.getElementById('card-cvc').value;
-      const amount = document.getElementById('amount-input').value;
-      const currency = document.getElementById('currency-selector').value;
-
-      if (!fullName || !cardNumber || !expiryMonth || !expiryYear || !cardCVC || !amount || !currency) {
-        alert("Please fill in all fields before proceeding!");
-        return;
-      }
-
-      this.disabled = true;
-
-      setTimeout(function() {
-        alert("Payment successful!");
-        // Optionally, reset the form or redirect
-      }, 2000);
-    });
-  </script>
 </body>
 </html>
