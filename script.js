@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Dynamically load the CSS file
+  const loadCSS = (href) => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  };
+
+  // Load your style.css
+  loadCSS("style.css"); // Change this to the correct path if necessary
+
   const cardOption = document.getElementById("payment-method-card");
   const paypalOption = document.getElementById("payment-method-paypal");
   const cardFields = document.getElementById("credit-card-fields");
