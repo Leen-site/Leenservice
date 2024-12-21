@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Dynamically load the CSS using XMLHttpRequest
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "https://raw.githubusercontent.com/Leenxz/Leenservice/refs/heads/main/main.css", true); // Replace with your actual CSS file URL
+  xhttp.open("GET", "https://raw.githubusercontent.com/Leenxz/Leenservice/refs/heads/main/script.js", true); // Replace with your actual CSS file URL
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState === 4) {
       if (xhttp.status === 200) {
