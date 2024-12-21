@@ -14,6 +14,40 @@ body {
 h4 {
   color: #9b59b6; /* Purple */
 }
+/* Button styling */
+.pay-button {
+  display: inline-block;
+  padding: 1em 2em;
+  background-color: #9b59b6; /* Purple */
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 50px; /* Makes it round */
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: auto;
+}
+
+.pay-button:hover {
+  background-color: #8e44ad; /* Darker purple */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px); /* Slight lift on hover */
+}
+
+.pay-button:active {
+  background-color: #7d3c98; /* Even darker purple */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(0); /* Click effect */
+}
+
+.pay-button i {
+  margin-right: 10px;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
 input,
 input[type="radio"] + label,
 input[type="checkbox"] + label:before,
@@ -25,10 +59,6 @@ select {
   background-color: #f9f9f9;
   border: 1px solid #e5e5e5;
   border-radius: 3px;
-  -webkit-transition: 0.35s ease-in-out;
-  -moz-transition: 0.35s ease-in-out;
-  -o-transition: 0.35s ease-in-out;
-  transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
 input:focus {
@@ -158,17 +188,8 @@ select option {
   display: block;
   border-right: 1px solid #e5e5e5;
   content: "";
-  -webkit-transition: 0.35s ease-in-out;
-  -moz-transition: 0.35s ease-in-out;
-  -o-transition: 0.35s ease-in-out;
-  transition: 0.35s ease-in-out;
-  transition: all 0.35s ease-in-out;
 }
 .input-group-icon .input-icon i {
-  -webkit-transition: 0.35s ease-in-out;
-  -moz-transition: 0.35s ease-in-out;
-  -o-transition: 0.35s ease-in-out;
-  transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
 .container {
@@ -211,37 +232,4 @@ select option {
     width: 100%;
     padding-right: 0;
   }
-}
-.pay-button {
-  display: inline-block;
-  padding: 1em 2em;
-  background-color: #9b59b6; /* Purple */
-  color: #fff;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 50px;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  width: auto;
-}
-
-.pay-button:hover {
-  background-color: #8e44ad; /* Darker purple */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-}
-
-.pay-button:active {
-  background-color: #7d3c98; /* Even darker purple */
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
-}
-
-.pay-button i {
-  margin-right: 10px;
-  font-size: 1.2em;
-  vertical-align: middle;
 }
