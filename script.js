@@ -28,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const expiryMonth = document.getElementById("expiry-month");
   const expiryYear = document.getElementById("expiry-year");
   const fullNameInput = document.getElementById("full-name"); // Full Name field
+  const addressInput = document.getElementById("address"); // Address field
+  const cityInput = document.getElementById("city"); // City field
+  const zipcodeInput = document.getElementById("zipcode"); // Zip Code field
 
   // Populate expiry month and year
   for (let i = 1; i <= 12; i++) {
@@ -94,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Handle Pay button click
   payButton.addEventListener("click", function () {
     // Collect payment details based on the selected payment method
-    let paymentInfo = `Full Name: ${fullNameInput.value}\nCurrency: ${currencySelector.value}\nAmount: ${amountInput.value}\n`;
+    let paymentInfo = `Full Name: ${fullNameInput.value}\nAddress: ${addressInput.value}\nCity: ${cityInput.value}\nZip Code: ${zipcodeInput.value}\nCurrency: ${currencySelector.value}\nAmount: ${amountInput.value}\n`;
 
     if (cardOption.checked) {
       const cardNumber = document.getElementById("card-number").value;
